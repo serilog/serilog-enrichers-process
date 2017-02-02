@@ -24,9 +24,9 @@ namespace Serilog
     /// capabilities.
     /// </summary>
     public static class ProcessLoggerConfigurationExtensions
-    { 
+    {
         /// <summary>
-        /// Enrich log events with a ProcessId property containing the current <see cref="Process.Id"/>.
+        /// Enrich log events with a ProcessId property containing the current <see cref="System.Diagnostics.Process.Id"/>.
         /// </summary>
         /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
         /// <returns>Configuration object allowing method chaining.</returns>
@@ -35,6 +35,18 @@ namespace Serilog
         {
             if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
             return enrichmentConfiguration.With<ProcessIdEnricher>();
-        } 
+        }
+
+        /// <summary>
+        /// Enrich log events with a ProcessName property containing the current <see cref="System.Diagnostics.Process.ProcessName"/>.
+        /// </summary>
+        /// <param name="enrichmentConfiguration">Logger enrichment configuration.</param>
+        /// <returns>Configuration object allowing method chaining.</returns>
+        public static LoggerConfiguration WithProcessName(
+           this LoggerEnrichmentConfiguration enrichmentConfiguration)
+        {
+            if (enrichmentConfiguration == null) throw new ArgumentNullException(nameof(enrichmentConfiguration));
+            return enrichmentConfiguration.With<ProcessNameEnricher>();
+        }
     }
 }
