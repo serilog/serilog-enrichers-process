@@ -24,7 +24,7 @@
     "net45": {},
     "netstandard1.3": {
       "dependencies": {
-        "System.Diagnostics.Process": "4.1.0-rc2-24027"
+        "System.Diagnostics.Process": "4.1.0"
       }
     }
   }
