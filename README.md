@@ -11,6 +11,16 @@ To use the enricher, first install the NuGet package:
 Install-Package Serilog.Enrichers.Process
 ```
 
+Then add `Enrich.WithProcess()` and/or `.WithProcessName()` to the `LoggerConfiguration()`:
+
+```csharp
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .Enrich.WithProcessId()
+    .Enrich.WithProcessName()
+    .CreateLogger();
+```
+
 * [Documentation](https://github.com/serilog/serilog/wiki)
 
 Copyright &copy; 2016 Serilog Contributors - Provided under the [Apache License, Version 2.0](http://apache.org/licenses/LICENSE-2.0.html).
