@@ -2,7 +2,7 @@
 
 The process enricher for Serilog.
  
-[![Build status](https://ci.appveyor.com/api/projects/status/ihq58voxyfwfanyg?svg=true)](https://ci.appveyor.com/project/serilog/serilog-enrichers-process) [![NuGet Version](http://img.shields.io/nuget/v/Serilog.Enrichers.Process.svg?style=flat)](https://www.nuget.org/packages/Serilog.Enricher.Process/)
+[![Build status](https://ci.appveyor.com/api/projects/status/ihq58voxyfwfanyg?svg=true)](https://ci.appveyor.com/project/serilog/serilog-enrichers-process) [![NuGet Version](http://img.shields.io/nuget/v/Serilog.Enrichers.Process.svg?style=flat)](https://www.nuget.org/packages/Serilog.Enrichers.Process/)
 
 
 To use the enricher, first install the NuGet package:
