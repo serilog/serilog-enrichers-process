@@ -11,7 +11,7 @@ To use the enricher, first install the NuGet package:
 Install-Package Serilog.Enrichers.Process
 ```
 
-Then add `Enrich.WithProcess()` and/or `.WithProcessName()` to the `LoggerConfiguration()`:
+Then add `Enrich.WithProcessId()` and/or `.WithProcessName()` to the `LoggerConfiguration()`:
 
 ```csharp
 Log.Logger = new LoggerConfiguration()
