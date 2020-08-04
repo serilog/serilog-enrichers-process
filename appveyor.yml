@@ -16,7 +16,7 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: nvZ/z+pMS91b3kG4DgfES5AcmwwGoBYQxr9kp4XiJHj25SAlgdIxFx++1N0lFH2x
+    secure: j+PjfZXCmLnVDJJreZpM8MPgFEhbaOZ4iwjbLZpG4X+rtNjThwOvsgwXC5QSbUL1
   skip_symbols: true
   on:
     branch: /^(master|dev)$/
