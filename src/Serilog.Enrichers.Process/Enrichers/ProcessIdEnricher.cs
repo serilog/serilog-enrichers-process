@@ -36,8 +36,16 @@ namespace Serilog.Enrichers
         /// <param name="propertyFactory">Factory for creating new properties to add to the event.</param>
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            _cachedProperty = _cachedProperty ?? propertyFactory.CreateProperty(ProcessIdPropertyName, System.Diagnostics.Process.GetCurrentProcess().Id);
+            _cachedProperty = _cachedProperty ?? propertyFactory.CreateProperty(ProcessIdPropertyName, GetProcessId());
             logEvent.AddPropertyIfAbsent(_cachedProperty);
+        }
+
+        private static int GetProcessId()
+        {
+            using(var process = System.Diagnostics.Process.GetCurrentProcess())
+            {
+                return process.Id;
+            }
         }
     }
 }
