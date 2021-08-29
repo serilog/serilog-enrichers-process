@@ -42,10 +42,14 @@ namespace Serilog.Enrichers
 
         private static int GetProcessId()
         {
-            using(var process = System.Diagnostics.Process.GetCurrentProcess())
+#if FEATURE_ENVIRONMENT_PID
+            return System.Environment.ProcessId;
+#else
+            using (var process = System.Diagnostics.Process.GetCurrentProcess())
             {
                 return process.Id;
             }
+#endif
         }
     }
 }
