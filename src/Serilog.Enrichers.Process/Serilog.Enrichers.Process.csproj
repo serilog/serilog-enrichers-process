@@ -39,6 +39,10 @@
     <PackageReference Include="System.Diagnostics.Process" Version="4.1.0" />
   </ItemGroup>
 
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
+    <DefineConstants>$(DefineConstants);FEATURE_ENVIRONMENT_PID</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\..\assets\serilog-enricher-nuget.png">
       <Pack>True</Pack>
