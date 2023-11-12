@@ -22,7 +22,7 @@ namespace Serilog.Enrichers
     /// </summary>
     public class ProcessNameEnricher : ILogEventEnricher
     {
-        LogEventProperty _cachedProperty;
+        LogEventProperty? _cachedProperty;
 
         /// <summary>
         /// The property name added to enriched log events.
@@ -36,13 +36,13 @@ namespace Serilog.Enrichers
         /// <param name="propertyFactory">Factory for creating new properties to add to the event.</param>
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            _cachedProperty = _cachedProperty ?? propertyFactory.CreateProperty(ProcessNamePropertyName, GetProcessName());
+            _cachedProperty ??= propertyFactory.CreateProperty(ProcessNamePropertyName, GetProcessName());
             logEvent.AddPropertyIfAbsent(_cachedProperty);
         }
 
         private static string GetProcessName()
         {
-            using(var process = System.Diagnostics.Process.GetCurrentProcess())
+            using (var process = System.Diagnostics.Process.GetCurrentProcess())
             {
                 return process.ProcessName;
             }
