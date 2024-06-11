@@ -4,7 +4,12 @@
     <Description>The process enricher for Serilog.</Description>
     <VersionPrefix>2.0.2</VersionPrefix>
     <Authors>Serilog Contributors</Authors>
-    <TargetFrameworks>net45;netstandard1.3;netstandard2.0;net5.0</TargetFrameworks>
+    <!-- .NET Framework version targeting is frozen at these two TFMs. -->
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT'">net471;net462</TargetFrameworks>
+    <!-- Policy is to trim TFM-specific builds to `netstandard2.0`, `net6.0`,
+         all active LTS versions, and optionally the latest RTM version, when releasing new
+         major Serilog versions. -->
+    <TargetFrameworks>$(TargetFrameworks);net8.0;net6.0;netstandard2.0</TargetFrameworks>
     <AssemblyName>Serilog.Enrichers.Process</AssemblyName>
     <AssemblyOriginatorKeyFile>../../assets/Serilog.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
@@ -25,23 +30,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Serilog" Version="2.3.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
-    <PackageReference Include="System.Diagnostics.Process" Version="4.1.0" />
-  </ItemGroup>
-
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
+  <PropertyGroup Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))">
     <DefineConstants>$(DefineConstants);FEATURE_ENVIRONMENT_PID</DefineConstants>
   </PropertyGroup>
 
