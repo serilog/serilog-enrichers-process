@@ -19,6 +19,7 @@
     <PackageIcon>serilog-enricher-nuget.png</PackageIcon>
     <PackageProjectUrl>http://serilog.net</PackageProjectUrl>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <RepositoryUrl>https://github.com/serilog/serilog-enrichers-process</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -42,6 +43,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="../../README.md" Pack="true" Visible="false" PackagePath="/" />
   </ItemGroup>
 
 </Project>
