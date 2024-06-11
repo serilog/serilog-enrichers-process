@@ -20,14 +20,14 @@ namespace Serilog.Enrichers
     /// <summary>
     /// Enriches log events with a ProcessName property containing the current <see cref="System.Diagnostics.Process.ProcessName"/>.
     /// </summary>
-    public class ProcessNameEnricher : ILogEventEnricher
+    sealed class ProcessNameEnricher : ILogEventEnricher
     {
         LogEventProperty? _cachedProperty;
 
         /// <summary>
         /// The property name added to enriched log events.
         /// </summary>
-        public const string ProcessNamePropertyName = "ProcessName";
+        const string ProcessNamePropertyName = "ProcessName";
 
         /// <summary>
         /// Enrich the log event.
@@ -42,10 +42,8 @@ namespace Serilog.Enrichers
 
         private static string GetProcessName()
         {
-            using (var process = System.Diagnostics.Process.GetCurrentProcess())
-            {
-                return process.ProcessName;
-            }
+            using var process = System.Diagnostics.Process.GetCurrentProcess();
+            return process.ProcessName;
         }
     }   
 }
