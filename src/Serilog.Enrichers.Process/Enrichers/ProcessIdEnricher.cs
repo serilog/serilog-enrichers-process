@@ -20,14 +20,14 @@ namespace Serilog.Enrichers
     /// <summary>
     /// Enriches log events with a ProcessId property containing the current <see cref="System.Diagnostics.Process.Id"/>.
     /// </summary>
-    public class ProcessIdEnricher : ILogEventEnricher
+    sealed class ProcessIdEnricher : ILogEventEnricher
     {
-        LogEventProperty _cachedProperty;
+        LogEventProperty? _cachedProperty;
 
         /// <summary>
         /// The property name added to enriched log events.
         /// </summary>
-        public const string ProcessIdPropertyName = "ProcessId";
+        const string ProcessIdPropertyName = "ProcessId";
 
         /// <summary>
         /// Enrich the log event.
@@ -36,16 +36,18 @@ namespace Serilog.Enrichers
         /// <param name="propertyFactory">Factory for creating new properties to add to the event.</param>
         public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
         {
-            _cachedProperty = _cachedProperty ?? propertyFactory.CreateProperty(ProcessIdPropertyName, GetProcessId());
+            _cachedProperty ??= propertyFactory.CreateProperty(ProcessIdPropertyName, GetProcessId());
             logEvent.AddPropertyIfAbsent(_cachedProperty);
         }
 
         private static int GetProcessId()
         {
-            using(var process = System.Diagnostics.Process.GetCurrentProcess())
-            {
-                return process.Id;
-            }
+#if FEATURE_ENVIRONMENT_PID
+            return System.Environment.ProcessId;
+#else
+            using var process = System.Diagnostics.Process.GetCurrentProcess();
+            return process.Id;
+#endif
         }
     }
 }
